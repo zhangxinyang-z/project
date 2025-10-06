@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传感器实时监控大屏</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sensor_index.css">
+</head>
+
+<body>
+    <div class="t_container">
+        <header class="t_header">
+            <span>
+                <i class="fas fa-satellite-dish"></i>传感器实时监控系统
+            </span>
+        </header>
+
+        <main class="t_main">
+            <!-- 左栏：实时数据卡片 -->
+            <div class="t_left_box">
+                <div class="t_mbox temperature">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span>实时温度</span>
+                    <h2 id="temperature">--</h2>
+                    <small>℃</small>
+                </div>
+                
+                <div class="t_mbox humidity">
+                    <i class="fas fa-tint"></i>
+                    <span>环境湿度</span>
+                    <h2 id="humidity">--</h2>
+                    <small>%</small>
+                </div>
+            </div>
+
+            <!-- 中栏：实时图表 -->
+            <div class="t_center_box">
+                <div id="realtimeChart" class="echart" style="width: 100%; height: 100%;"></div>
+            </div>
+
+            <!-- 右栏：历史图表 -->
+            <div class="t_right_box">
+                <div id="historyChart" class="echart" style="width: 100%; height: 100%;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/sensor_index.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1f1f;
+    color: #333;
+}
+
+.t_container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.t_header {
+    width: 100%;
+    height: 80px;
+    background-color: #0A1A2F;
+    border-bottom: 1px solid #122740;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+}
+
+.t_main {
+    width: 90%;
+    height: calc(100vh - 80px);
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.t_left_box {
+    width: 30%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.t_mbox {
+    width: 100%;
+    height: 20%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9523F;
+    border: 1px solid #13D0B2;
+    backdrop-filter: blur(5px);
+}
+
+.t_mbox i {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20%;
+    margin: auto;
+}
+
+.t_mbox h2 {
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.t_mbox span {
+    font-size: 18px;
+    color: #fff;
+    position: absolute;
+    top: 24%;
+    left: 48%;
+}
+
+.t_center_box {
+    width: 40%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.echart {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
+}
+
+.echart:hover {
+    box-shadow: 0 6px 16px rgba(44, 163, 253, 0.4);
+}
+
+/* 图表容器阴影增强 */
+.echarts {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
+}
+
+/* 悬浮时的高亮效果 */
+.echarts:hover {
+    box-shadow: 0 6px 16px rgba(44, 163, 253, 0.4);
+}
+
+/* 健康评分的数值标签特效 */
+.echarts-label {
+    text-shadow: 0 2px 4px rgba(152, 224, 2, 0.3);
+}
+
+/* 在原有index.css基础上添加以下内容 */
+/* ==================== 主题色重映射 ==================== */
+.t_header {
+    background: linear-gradient(to right, #0A1A2F, #122740) !important;
+    border-bottom: 1px solid rgba(26, 161, 253, 0.3) !important;
+}
+
+.t_mbox {
+    background: rgba(26, 161, 253, 0.1) !important;
+    border: 1px solid rgba(26, 161, 253, 0.3) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* 指标卡配色更新 */
+.t_rbox { background: linear-gradient(145deg, rgba(255,107, 107,0.2), rgba(230,35,35,0.2)) !important; }
+.t_gbox { background: linear-gradient(145deg, rgba(152,224,2,0.2), rgba(92,179,0,0.2)) !important; }
+.t_ybox { background: linear-gradient(145deg, rgba(44,163,253,0.2), rgba(26,115,203,0.2)) !important; }
+
+/* 表格样式增强 */
+.t_table thead tr {
+    background: rgba(26, 161, 253, 0.15) !important;
+    letter-spacing: 1px;
+}
+
+.t_table td {
+    border-color: rgba(26, 161, 253, 0.1) !important;
+    position: relative;
+}
+
+/* 参数盒子特效 */
+.t_b_box, .t_b_box1, .t_b_box2, .t_b_box3 {
+    border: 1px solid rgba(26, 161, 253, 0.3) !important;
+    background: rgba(26, 161, 253, 0.05);
+    transition: all 0.3s;
+}
+
+/* 动态阴影增强 */
+.echart {
+    box-shadow: 0 4px 12px rgba(26, 161, 253, 0.1) !important;
+    background: rgba(16, 32, 64, 0.6) !important;
+    border: 1px solid rgba(26, 161, 253, 0.2) !important;
+}
+
+.echart:hover {
+    box-shadow: 0 6px 24px rgba(26, 161, 253, 0.2) !important;
+}
+
+/* 状态指示灯动画 */
+@keyframes alert-blink {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+.alert-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    animation: alert-blink 1.5s infinite;
+}
+
+/* 字体图标集成 */
+[class^="icon-"] {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+}
+
+* 温度计图标 */
+.icon-thermometer:before { content: "\f491"; }
+/* 压力计图标 */
+.icon-gauge:before { content: "\f0e4"; }
+/* 警告图标 */
+.icon-alert:before { content: "\f071"; } 

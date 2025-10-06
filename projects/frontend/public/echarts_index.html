@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- ==================== 页面元信息 ==================== -->
+    <!-- 页面图标 -->
+    <link rel="icon" href="/img/logo.png" type="image/png">
+    <!-- 主样式表 -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 页面标题 -->
+    <title>航空发动机健康监测系统</title>
+
+    <!-- ==================== JavaScript 依赖 ==================== -->
+    <!-- jQuery 库 -->
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <!-- REM 适配脚本（用于移动端适配） -->
+    <script src="js/rem.js"></script>
+    <!-- ECharts 核心库 -->
+    <script src="js/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>  
+    <!-- 页面主逻辑脚本（包含图表初始化代码） -->
+    <script src="js/index.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ==================== 页面主体容器 ==================== -->
+    <div class="t_container">
+        <!-- 头部区域 -->
+        <header class="t_header">
+            <!-- 平台标题 -->
+            <span>
+                <i class="fas fa-space-shuttle"></i>航空发动机健康监测系统
+            </span>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="t_main">
+
+            <!-- 左栏：核心指标卡片 -->
+            <div class="t_left_box">
+                <!-- 左侧装饰线（静态图片） -->
+                <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                
+                <div class="t_mbox t_rbox">
+                    <i></i>
+                    <span>异常发动机</span>  
+                    <h2>3</h2>
+                </div>
+
+                <div class="t_mbox t_gbox">
+                    <i></i>
+                    <span>剩余寿命</span> 
+                    <h2>152周期</h2>
+                </div>
+                <div class="t_mbox t_ybox">
+                    <i></i>
+                    <span>在线传感器</span> 
+                    <h2>21通道</h2>
+                </div>
+
+                <!-- 右侧装饰线 -->
+                <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+            </div>
+
+
+            <!-- 中栏：设备统计与图表 -->
+            <div class="t_center_box">
+                <!-- 顶部统计区域 -->
+                <div class="t_top_box">
+                    <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                    <ul class="t_nav">
+                        <li>
+                            <span>监测机组</span> 
+                            <h1>24</h1>
+                            <i></i> 
+                        </li>
+                        <li>
+                            <span>健康率</span>
+                            <h1>92%</h1>
+                        </li>
+                        <li>
+                            <span>预警阈值</span>
+                            <h1>2.3σ</h1>
+                        </li>
+                    </ul>
+                    <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+                </div>
+
+                <!-- 底部图表区域（折线图/柱状图） -->
+                <div class="t_bottom_box">
+                    <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                    <div id="chart_3" class="echart" style="width: 100%; height: 3.6rem;"></div>
+                    <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+                </div>
+            </div>
+
+
+            <div class="t_right_box">
+                <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                <div id="chart_4" class="echart" style="width: 50%; height: 4.6rem; position: absolute;"></div>
+                
+                <header class="t_b_h">
+                    <span>启停次数</span> 
+                    <h3>15<span>次</span></h3>
+                </header>
+
+                <main class="t_b_m">
+                    <img src="img/map.png" alt="地图背景">
+                    
+                    <div class="t_b_box">
+                        <span>核心温度</span>
+                        <h2>842℃</h2>
+                    </div>
+
+                    <div class="t_b_box1">
+                        <span>燃烧压力</span>
+                        <h2>34MPa</h2>
+                    </div>
+
+                    <div class="t_b_box2">
+                        <span>振动幅度</span>
+                        <h2>0.8mm</h2>
+                    </div>
+
+                    <div class="t_b_box3">
+                        <span>滑油压力</span>
+                        <h2>380kPa</h2>
+                    </div>
+                </main>
+                <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+            </div>
+
+            <div class="b_left_box">
+                <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                <div id="chart_2" class="echart" style="width: 100%; height: 3.6rem;"></div>
+                <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+            </div>
+
+            <div class="b_center_box">
+                <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                <div id="chart_1" class="echart" style="width: 100%; height: 3.6rem;"></div>
+                <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+            </div>
+
+            <div class="b_right_box">
+                <img class="t_l_line" src="img/left_line.png" alt="装饰线">
+                <h1 class="t_title">实时预警记录</h1>
+                
+                <!-- 维保记录表格 -->
+                <table class="t_table">
+                    <thead>
+                        <tr>
+                            <th>发动机ID</th> 
+                            <th>故障类型</th> 
+                            <th>剩余寿命</th> 
+                            <th>发生时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FD-1357</td>
+                            <td>高温预警</td>
+                            <td>38周期</td>
+                            <td>14:32:05</td>
+                        </tr>
+                        <tr>
+                            <td>FD-2241</td>
+                            <td>振动超标</td>
+                            <td>12周期</td>
+                            <td>15:18:33</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img class="t_r_line" src="img/right_line.png" alt="装饰线">
+            </div>
+        </main>
+    </div>
+</body>
+</html>

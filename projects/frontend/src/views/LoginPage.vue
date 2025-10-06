@@ -1,0 +1,322 @@
+<template>
+  <div class="login-container">
+    <!-- 左侧信息阶梯 -->
+    <div class="info-panels">
+      <div 
+        v-for="(panel, index) in infoPanels" 
+        :key="index" 
+        class="info-panel"
+        :style="{ 'transition-delay': index * 0.3 + 's' }"
+      >
+        <div class="panel-icon">{{ panel.icon }}</div>
+        <div class="panel-content">
+          <h3>{{ panel.title }}</h3>
+          <p>{{ panel.content }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧登录表单 -->
+    <div class="login-form">
+      <h1 class="form-title">用户登录</h1>
+      <form @submit.prevent="handleLogin">
+        <div class="form-group">
+          <input 
+            v-model="username" 
+            type="text" 
+            required 
+            class="form-input"
+            placeholder="请输入用户名"
+          />
+        </div>
+        <div class="form-group">
+          <input 
+            v-model="password" 
+            type="password" 
+            required 
+            class="form-input"
+            placeholder="请输入密码"
+          />
+        </div>
+        <button type="submit" class="submit-button">
+          <span class="button-text">立即登录</span>
+          <span class="button-icon">→</span>
+        </button>
+        <div class="form-footer">
+          <router-link to="/register" class="register-link">注册新账号</router-link>
+        </div>
+        <p v-if="error" class="error-message">{{ error }}</p>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from '@/utils/axios';
+
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      error: '',
+      infoPanels: [
+        {
+          icon: '🚀',
+          title: '智能数据分析',
+          content: '实时监控系统运行状态，提供可视化决策支持'
+        },
+        {
+          icon: '🔒',
+          title: '安全认证体系',
+          content: '采用多重加密技术保障数据安全传输'
+        },
+        {
+          icon: '📈',
+          title: '趋势预测系统',
+          content: '基于AI算法实现未来趋势智能预测'
+        }
+      ]
+    };
+  },
+  methods: {
+    async handleLogin() {
+      try {
+        // 修改1：确保使用完整URL路径
+        const response = await axios.post(
+      '/login',
+      {
+        username: this.username,
+        password: this.password
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      }
+    );
+
+        // 修改2：添加响应数据验证
+    if (!response.data?.token) {
+      throw new Error('无效的服务器响应');
+    }
+
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('userRole', response.data.role);
+    localStorage.setItem('username', response.data.username);
+
+    this.$router.push('/home');
+  } catch (err) {
+    console.error('登录错误详情:', {
+      error: err,
+      response: err.response?.data
+    });
+    this.error = err.response?.data?.message || 
+               err.message || 
+               '登录失败，请检查凭证';
+      }
+    }
+  },
+  mounted() {
+    // 触发动画
+    setTimeout(() => {
+      document.querySelector('.info-panels').classList.add('active');
+      document.querySelector('.login-form').classList.add('active');
+    }, 100);
+  }
+};
+</script>
+
+<style scoped>
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 浅色渐变背景 */
+  padding: 0 10%;
+  overflow: hidden;
+}
+
+/* 左侧信息面板动画 */
+.info-panels {
+  width: 45%;
+  transform: translateX(-100%);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-panels.active {
+  transform: translateX(0);
+}
+
+.info-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: all 0.8s ease;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel:nth-child(1) { transition-delay: 0.3s; }
+.info-panel:nth-child(2) { transition-delay: 0.6s; }
+.info-panel:nth-child(3) { transition-delay: 0.9s; }
+
+.info-panels.active .info-panel {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.panel-icon {
+  font-size: 2.5rem;
+  margin-right: 20px;
+  color: #42b983; /* 绿色图标 */
+}
+
+.panel-content h3 {
+  color: #2c3e50;
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+}
+
+.panel-content p {
+  color: #666;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* 右侧登录表单动画 */
+.login-form {
+  width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.login-form.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.form-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  position: relative;
+}
+
+.form-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #42b983;
+  margin: 15px auto 0;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* 确保输入框宽度一致 */
+}
+
+.form-input:focus {
+  border-color: #42b983;
+  box-shadow: 0 0 8px rgba(66, 185, 131, 0.2);
+  outline: none;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #42b983 0%, #369f6e 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* 确保按钮宽度一致 */
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(66, 185, 131, 0.3);
+}
+
+.button-text {
+  font-weight: 500;
+}
+
+.button-icon {
+  font-size: 1.2rem;
+  transform: translateX(-5px);
+  transition: transform 0.3s ease;
+}
+
+.submit-button:hover .button-icon {
+  transform: translateX(0);
+}
+
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link {
+  color: #42b983;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.register-link:hover {
+  color: #369f6e;
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .info-panels {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+}
+</style>
